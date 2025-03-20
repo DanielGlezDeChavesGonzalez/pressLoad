@@ -15,6 +15,8 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
 
     List<User> findById(Integer id);
+
+    User findByUsernameAndPassword(String username, String password);
 //
 //    // Si quieres obtener solo las rutinas del usuario
 //    @Query("SELECT u.routines FROM User u WHERE u.id = :userId")

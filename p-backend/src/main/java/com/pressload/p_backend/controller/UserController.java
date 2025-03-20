@@ -36,6 +36,13 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getUserById(id));
     }
 
+    //TODO:
+    // Get user by username and password
+    @GetMapping("/")
+    public ResponseEntity<Optional<User>> getUserByUsernameAndPassword(@RequestBody String username, String password){
+        return ResponseEntity.ok().body(userService.getUserByUsernameAndPassword(username,password));
+    }
+
     // Post a user
     @PostMapping("/")
     public ResponseEntity<User> saveUser(@RequestBody User user){

@@ -33,6 +33,11 @@ public class UserService {
         return userRepository.findById(id);
     }
 
+    public Optional<User> getUserByUsernameAndPassword(String username, String password){
+        return Optional.ofNullable(userRepository.findByUsernameAndPassword(username, password));
+    }
+
+
     public User saveUser(User user){
         return userRepository.save(user);
     }
