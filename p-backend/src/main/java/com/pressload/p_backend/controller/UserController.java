@@ -25,10 +25,10 @@ public class UserController {
     private final UserService userService;
 
     // Get all users
-    @GetMapping("/")
-    public ResponseEntity<List<User>> getAllUsers(){
-        return ResponseEntity.ok().body(userService.getAllUsers());
-    }
+//    @GetMapping("/")
+//    public ResponseEntity<List<User>> getAllUsers(){
+//        return ResponseEntity.ok().body(userService.getAllUsers());
+//    }
 
     // Get user by id
     @GetMapping("/{id}")
@@ -37,20 +37,21 @@ public class UserController {
     }
 
     //TODO:
-    // Get user by username and password
-    @GetMapping("/")
+    // Get user by username and password revise
+//    @CrossOrigin(origins = "http://localhost:5173") // Habilita CORS solo para este endpoint
+    @PostMapping("/login")
     public ResponseEntity<Optional<User>> getUserByUsernameAndPassword(@RequestBody String username, String password){
         return ResponseEntity.ok().body(userService.getUserByUsernameAndPassword(username,password));
     }
 
     // Post a user
-    @PostMapping("/")
+    @PostMapping("/register")
     public ResponseEntity<User> saveUser(@RequestBody User user){
         return ResponseEntity.ok().body(userService.saveUser(user));
     }
 
     // Update a user
-    @PutMapping("/")
+    @PutMapping("/update")
     public ResponseEntity<User> updateUser(@RequestBody User user){
         return ResponseEntity.ok().body(userService.updateUser(user));
     }

@@ -1,12 +1,10 @@
 import logo from '../assets/logo.jpg'
-import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
 
     const navigate = useNavigate();
-    const history = useNavigate();
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -19,27 +17,32 @@ export default function Login() {
                 return;
             }
     
-            const response = await axios.get('http://localhost:8081/', {
-                params: { username, password }, // Mueve los datos a la propiedad 'params'
+            const response = await fetch('http://localhost:8080/users/login', {
+                method: 'POST', // Cambiado a POST para enviar credenciales en el cuerpo
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
             });
-            console.log('Login successful:', response.data);
-            history('/login');
-        } catch (error) {
-            if (axios.isAxiosError(error)) {
-                // Si el error es de Axios, maneja el error específico
-                console.error('Login failed:', error.response ? error.response.data : error.message);
-                setError(error.response ? error.response.data : 'Invalid username or password.');
-            } else if (error instanceof Error) {
-                // Si es un error genérico de JavaScript
-                console.error('Login failed:', error.message);
-                setError(error.message);
-            } else {
-                // Si el error es de un tipo inesperado
-                console.error('An unexpected error occurred:', error);
-                setError('An unexpected error occurred.');
+    
+            const data = await response.json();
+    
+            if (!response.ok) {
+                throw new Error(data.message || 'Invalid username or password.');
             }
+    
+            console.log('Login successful:', data);
+            navigate('/');
+        } catch (error) {
+            if (error instanceof Error) {
+                console.error('Login failed:', error.message);
+            } else {
+                console.error('Login failed:', error);
+            }
+            setError(error instanceof Error ? error.message : 'An unknown error occurred.');
         }
     };
+    
 
     const handleRegister = () => {
       navigate('/register'); // Navegar al register

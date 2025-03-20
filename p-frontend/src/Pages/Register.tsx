@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
 import logo from "../assets/logo.jpg"
 import { useState } from "react";
 
@@ -8,17 +7,16 @@ export default function Register() {
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
-    const [userName, setUserName] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
     const [error, setError] = useState(''); // State to manage error messages
-    const history = useNavigate(); // Get the history object for redirection
 
     const handleRegister = async () => {
         try {
             // Check for empty fields
-            if (!userName || !email || !password || !confirmPassword) {
+            if (!username || !email || !password || !confirmPassword) {
                 setError('Please fill in all fields.');
                 return;
             }
@@ -27,31 +25,41 @@ export default function Register() {
                 throw new Error("Passwords do not match");
             }
     
-            const response = await axios.post('http://localhost:8081/register', {
-                userName,
-                email,
-                password,
+            // Using fetch to send the POST request
+            const response = await fetch('http://localhost:8080/users/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json', // Tell the server the body is JSON
+                },
+                body: JSON.stringify({
+                    email,
+                    username,
+                    password,
+                }),
             });
-            // Handle successful signup
-            console.log(response.data);
-            history('/dashboard');
-        } catch (error) {
-            // Check if error is an AxiosError
-            if (axios.isAxiosError(error)) {
-                // Handle Axios-specific error
-                console.error('Signup failed:', error.response ? error.response.data : error.message);
-                setError(error.response ? error.response.data : error.message);
-            } else if (error instanceof Error) {
-                // Handle generic JavaScript errors
-                console.error('Signup failed:', error.message);
-                setError(error.message);
-            } else {
-                // Handle unexpected errors
-                console.error('An unexpected error occurred:', error);
-                setError('An unexpected error occurred.');
+    
+            // Check if the response is OK (status code 200-299)
+            if (!response.ok) {
+                // If not, throw an error with the response status text
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Signup failed');
             }
+    
+            // Handle successful signup
+            const data = await response.json();
+            console.log(data);
+            navigate('/login');
+        } catch (error) {
+            // Handle any errors that occur during the fetch
+            if (error instanceof Error) {
+                console.error('Signup failed:', error.message);
+            } else {
+                console.error('Signup failed:', error);
+            }
+            setError(error instanceof Error ? error.message : 'An unknown error occurred');
         }
     };
+    
 
     const handleLogin = () => {
       navigate('/login'); // Navegar al register
@@ -82,8 +90,8 @@ export default function Register() {
                             <label htmlFor="username" className="flex mb-2 text-sm font-medium text-gray-900 dark:text-white">Your username</label>
                             <input type="username" name="username" id="username" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600
                              focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
-                              dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Username" required={true} value={userName}
-                               onChange={(e) => setUserName(e.target.value)} />
+                              dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Username" required={true} value={username}
+                               onChange={(e) => setUsername(e.target.value)} />
                         </div>
                         <div>
                             <label htmlFor="password" className="flex mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
@@ -94,7 +102,7 @@ export default function Register() {
                         </div>
                         <div>
                             <label htmlFor="confirm-password" className="flex mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
-                            <input type="confirm-password" name="confirm-password" id="confirm-password" placeholder="••••••••" 
+                            <input type="password" name="confirm-password" id="confirm-password" placeholder="••••••••" 
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 
                             block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500
                              dark:focus:border-blue-500" required={true} value={confirmPassword}

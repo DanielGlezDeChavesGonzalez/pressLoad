@@ -1,14 +1,11 @@
 package com.pressload.p_backend.service;
 
-import com.pressload.p_backend.entity.Routine;
 import com.pressload.p_backend.entity.User;
 import com.pressload.p_backend.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -36,7 +33,6 @@ public class UserService {
     public Optional<User> getUserByUsernameAndPassword(String username, String password){
         return Optional.ofNullable(userRepository.findByUsernameAndPassword(username, password));
     }
-
 
     public User saveUser(User user){
         return userRepository.save(user);
