@@ -25,11 +25,10 @@ export default function Register() {
                 throw new Error("Passwords do not match");
             }
     
-            // Using fetch to send the POST request
             const response = await fetch('http://localhost:8080/users/register', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json', // Tell the server the body is JSON
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     email,
@@ -38,19 +37,15 @@ export default function Register() {
                 }),
             });
     
-            // Check if the response is OK (status code 200-299)
             if (!response.ok) {
-                // If not, throw an error with the response status text
                 const errorData = await response.json();
                 throw new Error(errorData.message || 'Signup failed');
             }
     
-            // Handle successful signup
             const data = await response.json();
             console.log(data);
             navigate('/login');
         } catch (error) {
-            // Handle any errors that occur during the fetch
             if (error instanceof Error) {
                 console.error('Signup failed:', error.message);
             } else {
@@ -60,10 +55,6 @@ export default function Register() {
         }
     };
     
-
-    const handleLogin = () => {
-      navigate('/login'); // Navegar al register
-    };
 
   return(
     <section className=""> 
@@ -118,9 +109,9 @@ export default function Register() {
                         </div>
                         <button type="submit" className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300
                          font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                          onClick={handleLogin}>Create an account</button>
+                          onClick={handleRegister}>Create an account</button>
                         <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                            Already have an account? <a href="#" className="font-medium text-primary-600 hover:underline dark:text-primary-500" onClick={handleRegister}>Login here</a>
+                            Already have an account? <a href="/login" className="font-medium text-primary-600 hover:underline dark:text-primary-500" >Login here</a>
                         </p>
                     </form>
                 </div>
