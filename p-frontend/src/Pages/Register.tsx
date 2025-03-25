@@ -8,6 +8,7 @@ export default function Register() {
 
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
+    const [premium, setPremium] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -34,6 +35,7 @@ export default function Register() {
                     email,
                     username,
                     password,
+                    premium
                 }),
             });
     
@@ -107,6 +109,12 @@ export default function Register() {
                             <label htmlFor="terms" className="font-light text-gray-500 dark:text-gray-300">I accept the <a className="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">Terms and Conditions</a></label>
                             </div>
                         </div>
+                        <label className="inline-flex items-center cursor-pointer">
+                            <input type="checkbox" value={premium} className="sr-only peer"
+                             onChange={(e) => setPremium(e.target.value)}/>
+                            <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+                            <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Premium User ?</span>
+                        </label>
                         <button type="submit" className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300
                          font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                           onClick={handleRegister}>Create an account</button>

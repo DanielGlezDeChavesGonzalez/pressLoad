@@ -1,6 +1,7 @@
 // import userFoto from "../assets/userimage.webp"
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
+import User from "./User";
 
 export default function Home(){
 
@@ -10,9 +11,7 @@ export default function Home(){
         <div className="flex flex-col justify-between">
             {/* <Header imageSrc={userFoto}/> */}
             <Header />
-            <div className="flex flex-grow mb-auto h-100vh text-amber-50">
-                User info
-            </div>
+            <User/>
             <Footer />
         </div>
     )

@@ -34,37 +34,8 @@ public class UserController {
 
     // Get user by id
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<User>> getUserById(@PathVariable Long id){
+    public ResponseEntity<Optional<User>> getUserById(@PathVariable Long id) {
         return ResponseEntity.ok().body(userService.getUserById(id));
-    }
-
-    // TODO:
-    // Get user by username and password revise
-//    @CrossOrigin(origins = "http://localhost:5173") // Habilita CORS solo para este endpoint
-    // el post si no encuentra el usuario que devuelva error, en vez de null
-    @PostMapping("/login")
-    public ResponseEntity<Optional<User>> loginUser(@RequestBody Map<String, String> credentials) {
-        String username = credentials.get("username");
-        String password = credentials.get("password");
-
-//        System.out.println("Intento de login: " + username + " " + password);
-
-        Optional<User> user = userService.getUserByUsernameAndPassword(username, password);
-
-        if (user.isPresent()) {
-            return ResponseEntity.ok(user);
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Optional.empty());
-        }
-    }
-
-
-    // Post a user
-    @PostMapping("/register")
-    public ResponseEntity<User> saveUser(@RequestBody User user){
-
-//      String passwordEncripted   :: Must implement encripted password
-        return ResponseEntity.ok().body(userService.saveUser(user));
     }
 
     // Update a user

@@ -32,6 +32,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private Boolean premium;
+
     @Column(updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
