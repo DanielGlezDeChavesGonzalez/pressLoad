@@ -17,6 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Validated
 public class RoutineController {
+
     private final RoutineService routineService;
     private final UserService userService;
 
@@ -43,7 +44,7 @@ public class RoutineController {
         return ResponseEntity.ok().body(savedRoutine);
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteRoutineById(@PathVariable Long id ) {
         routineService.deleteRoutineById(id);
         return ResponseEntity.ok().body("Deleted user successfully");

@@ -2,10 +2,7 @@ package com.pressload.p_backend.repository;
 
 import com.pressload.p_backend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -14,8 +11,7 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User,Long> {
 
-
-    List<User> findById(Integer id);
+    Optional<User> findById(Long id);
 
     User findByUsernameAndPassword(String username, String password);
 //

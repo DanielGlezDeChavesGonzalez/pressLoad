@@ -39,16 +39,15 @@ public class UserService {
     }
 
     public User updateUser(User updatedUser) {
-        return userRepository.findById(updatedUser.getId())
-                .map(existingUser -> {
-                    existingUser.setUpdatedAt(LocalDateTime.now());
-                    existingUser.setUsername(updatedUser.getUsername());
-                    existingUser.setEmail(updatedUser.getEmail());
-                    existingUser.setPassword(updatedUser.getPassword());
-                    existingUser.setPremium(updatedUser.getPremium());
-                    return userRepository.save(existingUser);
-                })
-                .orElseThrow(() -> new EntityNotFoundException("User with ID " + updatedUser.getId() + " not found"));
+
+        User user = userRepository.findById(updatedUser.getId()).get();
+        user.setUsername(updatedUser.getUsername());
+        user.setEmail(updatedUser.getEmail());
+        user.setPassword(updatedUser.getPassword());
+        user.setUpdatedAt(LocalDateTime.now());
+        user.setPremium(updatedUser.getPremium());
+
+        return userRepository.save(user);
     }
 
     public void deleteUserById(Long id) {
