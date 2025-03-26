@@ -15,7 +15,7 @@ class UserRepositoryTest {
 
     @Test
     public void saveUser(){
-        User userTest = User.builder().name("josu").nickname("jp").build();
+        User userTest = User.builder().username("josu").build();
         userRepository.save(userTest);
     }
 

@@ -11,9 +11,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Service layer is where all the business logic lies
- */
 
 @Service
 @Slf4j
@@ -38,17 +35,17 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User updateUser(User updatedUser) {
-
-        User user = userRepository.findById(updatedUser.getId()).get();
-        user.setUsername(updatedUser.getUsername());
-        user.setEmail(updatedUser.getEmail());
-        user.setPassword(updatedUser.getPassword());
-        user.setUpdatedAt(LocalDateTime.now());
-        user.setPremium(updatedUser.getPremium());
-
-        return userRepository.save(user);
+    public Optional<User> updateUser(User updatedUser) {
+        return userRepository.findById(updatedUser.getId())
+                .map(existingUser -> {
+                    existingUser.setUsername(updatedUser.getUsername());
+                    existingUser.setEmail(updatedUser.getEmail());
+                    existingUser.setPassword(updatedUser.getPassword()); // Considera encriptar antes de guardar
+                    existingUser.setRole(updatedUser.getRole()); // Si maneja roles
+                    return userRepository.save(existingUser);
+                });
     }
+
 
     public void deleteUserById(Long id) {
         User user = userRepository.findById(id)

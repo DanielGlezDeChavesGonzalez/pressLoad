@@ -1,5 +1,6 @@
 package com.pressload.p_backend.service;
 
+import com.pressload.p_backend.entity.Role;
 import com.pressload.p_backend.entity.User;
 import com.pressload.p_backend.repository.UserRepository;
 import com.pressload.p_backend.request.auth.AuthenticationRequest;
@@ -22,15 +23,17 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
-        var role = request.getRole() == 1 ? Role.STUDENT : request.getRole() == 2 ? Role.FACULTY : Role.ADMIN;
+        System.out.println(request.getRole()  + " ROL");
+        var role = request.getRole() == 1 ? Role.USER : request.getRole() == 2 ? Role.PAID_USER : Role.ADMIN;
+        System.out.println(role  + " ROL");
+
         var user = User.builder()
-                .name(request.getName())
-                .lastname(request.getLastname())
+                .username(request.getUsername())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(role)
                 .build();
-        if(userRepository.findByEmail(request.getEmail()).isEmpty()){
+        if(userRepository.findByUsername(request.getUsername()).isEmpty()){
             userRepository.save(user);
         }
         var jwtToken = jwtService.generateToken(user);
@@ -40,9 +43,9 @@ public class AuthService {
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                request.getEmail(),
+                request.getUsername(),
                 request.getPassword()));
-        var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
+        var user = userRepository.findByUsername(request.getUsername()).orElseThrow();
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder().token(jwtToken).build();
     }

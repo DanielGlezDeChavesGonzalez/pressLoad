@@ -1,16 +1,12 @@
 package com.pressload.p_backend.controller;
 
-import com.pressload.p_backend.entity.Routine;
 import com.pressload.p_backend.entity.User;
 import com.pressload.p_backend.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -40,7 +36,7 @@ public class UserController {
 
     // Update a user
     @PutMapping("/update")
-    public ResponseEntity<User> updateUser(@RequestBody User user){
+    public ResponseEntity<Optional<User>> updateUser(@RequestBody User user){
         return ResponseEntity.ok().body(userService.updateUser(user));
     }
 

@@ -9,14 +9,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * An entity class represents a table in a relational database
- */
 
 @Entity
 @Table(name = "users")
@@ -39,9 +35,6 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
-    private Boolean premium;
-
     @Column(updatable = false)
     @CreationTimestamp
     private LocalDateTime createdAt = LocalDateTime.now();
@@ -53,10 +46,15 @@ public class User implements UserDetails {
     @JsonManagedReference
     private List<Routine> routines;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)  // Guarda como "USER", "PAID_USER", "ADMIN"
+    private Role role;  // Puede ser "USER", "PAID_USER" o "ADMIN"
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of( new SimpleGrantedAuthority("ROLE_USER") );
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
+
 
     @Override
     public String getUsername() {
@@ -70,21 +68,21 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return UserDetails.super.isAccountNonExpired();
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return UserDetails.super.isAccountNonLocked();
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return UserDetails.super.isCredentialsNonExpired();
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return UserDetails.super.isEnabled();
+        return true;
     }
 }
