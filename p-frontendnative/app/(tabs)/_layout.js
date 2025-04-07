@@ -4,7 +4,7 @@ export default function Layout() {
   return (
     <Tabs screenOptions={{ headerShown: false }}>
       <Tabs.Screen
-        name="home"
+        name="index"
         options={{
           title: "Home",
         }}
@@ -16,13 +16,13 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
-        name="routines"
+        name="routinesRegister"
         options={{
           title: "Routines",
         }}
       />
       <Tabs.Screen
-        name="meals"
+        name="foodRegister"
         options={{
           title: "Meals",
         }}
