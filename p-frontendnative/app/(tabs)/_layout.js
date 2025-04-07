@@ -10,13 +10,7 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
-        name="profile"
-        options={{
-          title: "Profile",
-        }}
-      />
-      <Tabs.Screen
-        name="routinesRegister"
+        name="routineRegister"
         options={{
           title: "Routines",
         }}
@@ -25,6 +19,12 @@ export default function Layout() {
         name="foodRegister"
         options={{
           title: "Meals",
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
         }}
       />
     </Tabs>
