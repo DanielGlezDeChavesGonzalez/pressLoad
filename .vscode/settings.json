@@ -1,0 +1,6 @@
+{
+  "java.compile.nullAnalysis.mode": "automatic",
+  "editor.formatOnSave": true,
+  "prettier.bracketSameLine": true,
+  "prettier.jsxSingleQuote": true
+}
