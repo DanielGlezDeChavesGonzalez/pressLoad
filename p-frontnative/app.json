@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "p-frontendnative",
-    "slug": "p-frontendnative",
+    "name": "p-frontnative",
+    "slug": "p-frontnative",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
