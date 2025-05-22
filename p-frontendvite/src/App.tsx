@@ -7,6 +7,7 @@ import User from "./pages/User";
 import Routines from "./pages/Routines";
 import Meals from "./pages/Meals";
 import Settings from "./pages/Settings";
+import "./styles/styles.css";
 
 function App() {
   return (

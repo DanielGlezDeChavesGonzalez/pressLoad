@@ -33,14 +33,18 @@ export default function LateralPanel() {
         />
       )}
 
+  {/* border: 1px solid #d1d5db;
+  border-radius: 0.75rem;
+  background-color: #f9fafb;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04); */}
       {/* Panel lateral */}
       <div
         className={`
           fixed sm:relative
           ${isOpen ? "translate-x-0" : "-translate-x-full sm:translate-x-0"}
           transition-transform duration-300 ease-in-out
-          flex flex-col flex-none w-[256px] min-h-full bg-gray-100 border-r-2 border-gray-700
-          z-50 sm:z-auto
+          flex flex-col flex-none w-[250px] min-h-full bg-[#f9fafb] border-r-1 border-[#d1d5db]
+          z-50 sm:z-auto sm:sticky sm:top-0 sm:h-screen sm:mr-5
         `}
       >
         <div className="w-full px-4 py-3">

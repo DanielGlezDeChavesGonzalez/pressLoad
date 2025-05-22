@@ -1,0 +1,84 @@
+.chart {
+  position: relative; /* Para posicionar elementos hijos de forma absoluta */
+  display: flex;
+  justify-content: center; /* Centra el chart horizontalmente */
+  align-items: center; /* Centra el chart verticalmente */
+  margin: 1.25rem 0;
+  width: 100%;
+  max-width: 600px;
+  padding-bottom: 15rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  background-color: #f9fafb;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.chart-title {
+  position: absolute;
+  top: 1rem; /* Ajusta según tu padding */
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: #374151;
+  text-align: center;
+}
+
+.profile-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 260px;
+  padding: 1rem;
+  border: 1px solid #d1d5db;
+  /* border-radius: 0.75rem; */
+  background-color: #f9fafb;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.settings-card {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: 900px;  /* Más ancho para acomodar el menú lateral y contenido */
+  border: 1px solid #d1d5db;
+  border-radius: 0.75rem;
+  background-color: #f9fafb;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  overflow: hidden; /* Para que los bordes redondeados se apliquen al contenido */
+}
+
+.settings-nav {
+  width: 250px;
+  border-right: 1px solid #d1d5db;
+  background-color: #ffffff;
+  padding: 1.5rem 1rem;
+}
+
+.settings-content {
+  flex: 1;
+  padding: 1.5rem;
+  background-color: #f9fafb;
+  overflow-y: auto;
+}
+
+.settings-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  color: #4b5563;
+  transition: all 0.2s ease;
+}
+
+.settings-nav-item:hover {
+  background-color: #f3f4f6;
+}
+
+.settings-nav-item.active {
+  background-color: #f3f4f6;
+  color: #111827;
+  font-weight: 500;
+}
