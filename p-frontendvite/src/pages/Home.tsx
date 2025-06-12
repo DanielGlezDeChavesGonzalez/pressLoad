@@ -57,15 +57,6 @@ export default function Home() {
             <div className="chart">
               <p className="chart-title">Meals</p>
             </div>
-            <div className="chart">
-              <p className="chart-title">Meals</p>
-            </div>
-            <div className="chart">
-              <p className="chart-title">Meals</p>
-            </div>
-            <div className="chart">
-              <p className="chart-title">Meals</p>
-            </div>
           </div>
         </div>
 

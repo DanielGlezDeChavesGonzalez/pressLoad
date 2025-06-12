@@ -12,7 +12,7 @@ export default function LateralPanel() {
   return (
     <>
       {/* Botón de menú móvil */}
-      <div className="sm:hidden fixed top-4 left-4 z-50">
+      <div className="lg:hidden fixed top-4 left-4 z-50">
         <button
           onClick={toggleMenu}
           className="text-gray-700 hover:text-gray-900"
@@ -28,23 +28,19 @@ export default function LateralPanel() {
       {/* Overlay oscuro cuando el menú está abierto en móvil */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black opacity-30 z-40 sm:hidden"
+          className="fixed inset-0 bg-black/30 z-40 lg:hidden"
           onClick={toggleMenu}
         />
       )}
 
-  {/* border: 1px solid #d1d5db;
-  border-radius: 0.75rem;
-  background-color: #f9fafb;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04); */}
       {/* Panel lateral */}
       <div
         className={`
-          fixed sm:relative
-          ${isOpen ? "translate-x-0" : "-translate-x-full sm:translate-x-0"}
+          fixed lg:relative
+          ${isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
           transition-transform duration-300 ease-in-out
           flex flex-col flex-none w-[250px] min-h-full bg-[#f9fafb] border-r-1 border-[#d1d5db]
-          z-50 sm:z-auto sm:sticky sm:top-0 sm:h-screen sm:mr-5
+          z-50 lg:z-auto lg:sticky lg:top-0 lg:h-screen lg:mr-5
         `}
       >
         <div className="w-full px-4 py-3">
@@ -72,7 +68,7 @@ export default function LateralPanel() {
               <li className="flex items-center justify-center w-full">
                 <a
                   href="/"
-                  className="text-gray-800 hover:bg-gray-700 hover:text-white focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 mr-2  focus:outline-none "
+                  className="text-gray-800 hover:bg-gray-700 hover:text-white focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 mr-2 focus:outline-none"
                 >
                   Home
                 </a>
@@ -80,7 +76,7 @@ export default function LateralPanel() {
               <li className="flex items-center justify-center w-full">
                 <a
                   href="/meals"
-                  className="text-gray-800 hover:bg-gray-700 hover:text-white focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2  mr-2  focus:outline-none "
+                  className="text-gray-800 hover:bg-gray-700 hover:text-white focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 mr-2 focus:outline-none"
                 >
                   Meals
                 </a>
@@ -88,7 +84,7 @@ export default function LateralPanel() {
               <li className="flex items-center justify-center w-full">
                 <a
                   href="/routines"
-                  className="text-gray-800 hover:bg-gray-700 hover:text-white focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2  mr-2  focus:outline-none "
+                  className="text-gray-800 hover:bg-gray-700 hover:text-white focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 mr-2 focus:outline-none"
                 >
                   Routines
                 </a>
@@ -96,7 +92,7 @@ export default function LateralPanel() {
               <li className="flex items-center justify-center w-full">
                 <a
                   href="/settings"
-                  className="text-gray-800 hover:bg-gray-700 hover:text-white focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2  mr-2  focus:outline-none "
+                  className="text-gray-800 hover:bg-gray-700 hover:text-white focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 mr-2 focus:outline-none"
                 >
                   Settings
                 </a>
@@ -109,7 +105,7 @@ export default function LateralPanel() {
           <div className="flex items-center justify-center mt-4">
             <a
               href="/login"
-              className="text-gray-800 hover:bg-gray-700 hover:text-white focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2  mr-2  focus:outline-none "
+              className="text-gray-800 hover:bg-gray-700 hover:text-white focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 mr-2 focus:outline-none"
             >
               Log in
             </a>
@@ -117,7 +113,7 @@ export default function LateralPanel() {
           <div className="flex items-center justify-center mt-4">
             <a
               href="/register"
-              className="text-white bg-gray-500 hover:bg-gray-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2  mr-2 dark:bg-primary-600 focus:outline-none dark:focus:ring-primary-800"
+              className="text-white bg-gray-500 hover:bg-gray-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 mr-2 dark:bg-primary-600 focus:outline-none dark:focus:ring-primary-800"
             >
               Get started
             </a>
