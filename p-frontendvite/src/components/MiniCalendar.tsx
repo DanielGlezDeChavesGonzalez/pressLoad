@@ -4,11 +4,13 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 interface MiniCalendarProps {
   selectedDate: Date;
   onDateSelect: (date: Date) => void;
+  renderDay?: (date: Date) => React.ReactNode;
 }
 
 export default function MiniCalendar({
   selectedDate,
   onDateSelect,
+  renderDay,
 }: MiniCalendarProps) {
   const [currentMonth, setCurrentMonth] = useState(
     new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1)
@@ -108,63 +110,65 @@ export default function MiniCalendar({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-4">
+    <div className='bg-white rounded-lg shadow-sm p-4'>
       {/* Header del calendario */}
-      <div className="flex items-center justify-between mb-4">
+      <div className='flex items-center justify-between mb-4'>
         <button
           onClick={() => navigateMonth("prev")}
-          className="p-1 hover:bg-gray-100 rounded"
-        >
-          <ChevronLeftIcon className="h-4 w-4" />
+          className='p-1 hover:bg-gray-100 rounded'>
+          <ChevronLeftIcon className='h-4 w-4' />
         </button>
-        <h3 className="font-semibold text-sm">
+        <h3 className='font-semibold text-sm'>
           {monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}
         </h3>
         <button
           onClick={() => navigateMonth("next")}
-          className="p-1 hover:bg-gray-100 rounded"
-        >
-          <ChevronRightIcon className="h-4 w-4" />
+          className='p-1 hover:bg-gray-100 rounded'>
+          <ChevronRightIcon className='h-4 w-4' />
         </button>
       </div>
-
       {/* Días de la semana */}
-      <div className="grid grid-cols-7 gap-1 mb-2">
+      <div className='grid grid-cols-7 gap-1 mb-2'>
         {["L", "M", "X", "J", "V", "S", "D"].map((day) => (
           <div
             key={day}
-            className="text-center text-xs font-medium text-gray-500 p-1"
-          >
+            className='text-center text-xs font-medium text-gray-500 p-1'>
             {day}
           </div>
         ))}
-      </div>
-
+      </div>{" "}
       {/* Días del mes */}
-      <div className="grid grid-cols-7 gap-1">
+      <div className='grid grid-cols-7 gap-1'>
         {generateCalendarDays().map((day, index) => (
           <button
             key={index}
             onClick={() => {
-              handleDayClick(day);
+              if (day) handleDayClick(day);
             }}
             disabled={!day}
             className={`
               h-8 w-8 text-xs rounded flex items-center justify-center
               ${!day ? "invisible" : "hover:bg-gray-100"}
               ${
-                isSelectedDay(day)
+                day && isSelectedDay(day)
                   ? "bg-blue-500 text-white hover:bg-blue-600"
                   : ""
               }
               ${
-                isToday(day) && !isSelectedDay(day)
+                day && isToday(day) && !isSelectedDay(day)
                   ? "bg-gray-200 font-semibold"
                   : ""
               }
-            `}
-          >
-            {day}
+            `}>
+            {day && renderDay
+              ? renderDay(
+                  new Date(
+                    currentMonth.getFullYear(),
+                    currentMonth.getMonth(),
+                    day
+                  )
+                )
+              : day}
           </button>
         ))}
       </div>
