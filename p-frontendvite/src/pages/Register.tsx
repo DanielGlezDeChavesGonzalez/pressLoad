@@ -1,50 +1,47 @@
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.jpg";
 import { useState } from "react";
+import axios from "axios";
 
 export default function Register() {
   const navigate = useNavigate();
+  // const [premium, setPremium] = useState("");
 
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [premium, setPremium] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [formInfo, setFormInfo] = useState({
+    email: "",
+    username: "",
+    password: "",
+    confirmPassword: "",
+  });
 
   const [error, setError] = useState(""); // State to manage error messages
 
   const handleRegister = async () => {
     try {
       // Check for empty fields
-      if (!username || !email || !password || !confirmPassword) {
+      if (
+        !formInfo.username ||
+        !formInfo.email ||
+        !formInfo.password ||
+        !formInfo.confirmPassword
+      ) {
         setError("Please fill in all fields.");
         return;
       }
 
-      if (password !== confirmPassword) {
+      if (formInfo.password !== formInfo.confirmPassword) {
         throw new Error("Passwords do not match");
       }
 
-      const response = await fetch("http://localhost:8080/users/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          username,
-          password,
-          premium,
-        }),
-      });
+      console.log(formInfo);
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Signup failed");
-      }
+      const response = await axios.post(
+        "http://localhost:8080/users/register",
+        formInfo
+      );
 
-      const data = await response.json();
-      console.log(data);
+      console.log("respuesta: ", response);
+
       navigate("/login");
     } catch (error) {
       if (error instanceof Error) {
@@ -98,8 +95,10 @@ export default function Register() {
                               dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@mail.com"
                   required={true}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={formInfo.email}
+                  onChange={(e) =>
+                    setFormInfo({ ...formInfo, email: e.target.value })
+                  }
                 />
               </div>
               <div>
@@ -118,8 +117,10 @@ export default function Register() {
                               dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Username"
                   required={true}
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  value={formInfo.username}
+                  onChange={(e) =>
+                    setFormInfo({ ...formInfo, username: e.target.value })
+                  }
                 />
               </div>
               <div>
@@ -138,8 +139,13 @@ export default function Register() {
                             rounded-lg focus:ring-primary-600 focus:border-primary-600 flex w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
                              dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required={true}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={formInfo.password}
+                  onChange={(e) =>
+                    setFormInfo({
+                      ...formInfo,
+                      password: e.target.value,
+                    })
+                  }
                 />
               </div>
               <div>
@@ -158,11 +164,16 @@ export default function Register() {
                             block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500
                              dark:focus:border-blue-500"
                   required={true}
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  value={formInfo.confirmPassword}
+                  onChange={(e) =>
+                    setFormInfo({
+                      ...formInfo,
+                      confirmPassword: e.target.value,
+                    })
+                  }
                 />
-              </div>
-              <div className="flex items-start">
+               </div>
+              {/*<div className="flex items-start">
                 <div className="flex items-center h-5">
                   <input
                     id="terms"
@@ -186,8 +197,8 @@ export default function Register() {
                     </a>
                   </label>
                 </div>
-              </div>
-              <label className="inline-flex items-center cursor-pointer">
+              </div> */
+              /* <label className="inline-flex items-center cursor-pointer">
                 <input
                   type="checkbox"
                   value={premium}
@@ -198,11 +209,12 @@ export default function Register() {
                 <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
                   Premium User ?
                 </span>
-              </label>
+              </label> */}
               <button
                 type="submit"
-                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300
-                         font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                className="w-full text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 
+                        font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800
+                        "
                 onClick={handleRegister}
               >
                 Create an account

@@ -1,36 +1,30 @@
 import logo from "../assets/logo.jpg";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Login() {
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [formInfo, setFormInfo] = useState({
+    username: "",
+    password: "",
+  });
   const [error, setError] = useState("");
 
   const handleLogin = async () => {
     try {
-      if (!username || !password) {
+      if (!formInfo.username || !formInfo.password) {
         setError("Please enter both username and password.");
         return;
       }
 
-      const response = await fetch("http://localhost:8080/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      });
+      const response = await axios.post(
+        "http::/localhost/users/login",
+        formInfo
+      );
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Invalid username or password.");
-      }
-
-      console.log("Login successful:", data);
+      console.log("Login successful:", response);
       navigate("/");
     } catch (error) {
       if (error instanceof Error) {
@@ -84,8 +78,10 @@ export default function Login() {
                              dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@company.com"
                   required={true}
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  value={formInfo.username}
+                  onChange={(e) =>
+                    setFormInfo({ ...formInfo, username: e.target.value })
+                  }
                 />
               </div>
               <div>
@@ -104,8 +100,10 @@ export default function Login() {
                              rounded-lg focus:ring-gray-600 focus:border-gray-600 flex w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
                               dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required={true}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={formInfo.password}
+                  onChange={(e) =>
+                    setFormInfo({ ...formInfo, password: e.target.value })
+                  }
                 />
               </div>
               <div className="flex items-center justify-between">
@@ -116,7 +114,6 @@ export default function Login() {
                       aria-describedby="remember"
                       type="checkbox"
                       className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-gray-600 dark:ring-offset-gray-800"
-                      required={true}
                     />
                   </div>
                   <div className="ml-3 text-sm">

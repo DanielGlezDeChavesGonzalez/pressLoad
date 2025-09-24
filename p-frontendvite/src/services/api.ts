@@ -36,45 +36,6 @@ export interface DashboardData {
   userStats: UserStats;
 }
 
-export interface Meal {
-  id: number;
-  name: string;
-  date: string;
-  time: string;
-  notes?: string;
-  totalCalories?: number;
-  totalProteins?: number;
-  totalCarbohydrates?: number;
-  totalFats?: number;
-  mealFoods?: MealFood[];
-  // Propiedades compatibles con el frontend existente
-  calories?: number;
-  proteins?: number;
-  carbohydrates?: number;
-  fats?: number;
-}
-
-export interface MealFood {
-  id: number;
-  food: Food;
-  quantity: number;
-  unit: string;
-  calories: number;
-  proteins: number;
-  carbohydrates: number;
-  fats: number;
-}
-
-export interface Food {
-  id: number;
-  name: string;
-  caloriesPer100g: number;
-  proteinsPer100g: number;
-  carbohydratesPer100g: number;
-  fatsPer100g: number;
-  description?: string;
-}
-
 export interface Routine {
   id: number;
   name: string;
