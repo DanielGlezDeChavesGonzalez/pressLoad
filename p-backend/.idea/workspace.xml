@@ -5,51 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b4faed15-befc-4c41-95d0-85050724a4a4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pressload/p_backend/CorsConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pressload/p_backend/PBackendApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pressload/p_backend/configuration/ApplicationConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pressload/p_backend/configuration/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pressload/p_backend/controller/AuthController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pressload/p_backend/controller/RoutineController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pressload/p_backend/controller/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pressload/p_backend/entity/Exercise.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pressload/p_backend/entity/RepsWeight.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pressload/p_backend/entity/Role.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pressload/p_backend/entity/Routine.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pressload/p_backend/entity/RoutineExercise.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pressload/p_backend/entity/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pressload/p_backend/repository/RoutineRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pressload/p_backend/repository/UserRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pressload/p_backend/request/auth/AuthenticationRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pressload/p_backend/request/auth/RegisterRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pressload/p_backend/response/AuthenticationResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pressload/p_backend/service/AuthService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pressload/p_backend/service/RoutineService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pressload/p_backend/service/UserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pressload/p_backend/service/jwt/JwtAuthenticationFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pressload/p_backend/service/jwt/JwtService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/pressload/p_backend/PBackendApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/pressload/p_backend/repository/UserRepositoryTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../p-frontendvite/src/components/MiniCalendar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../p-frontendvite/src/components/MiniCalendar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../p-frontendvite/src/pages/Routines.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../p-frontendvite/src/pages/Routines.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../p-frontnative/app/(tabs)/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../p-frontnative/app/(tabs)/_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../p-frontnative/app/(tabs)/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../p-frontnative/app/(tabs)/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../p-frontnative/app/(tabs)/macros.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../p-frontnative/app/(tabs)/macros.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../p-frontnative/app/(tabs)/profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../p-frontnative/app/(tabs)/profile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../p-frontnative/app/(tabs)/routines.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../p-frontnative/app/(tabs)/routines.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../p-frontnative/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../p-frontnative/app/_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../p-frontnative/components/main.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../p-frontnative/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../p-frontnative/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../p-frontnative/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../p-frontnative/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../p-frontnative/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/../p-frontnative/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/pressload/p_backend/configuration/ApplicationConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/pressload/p_backend/configuration/DataInitializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/pressload/p_backend/configuration/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/pressload/p_backend/controller/AuthController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/pressload/p_backend/entity/Routine.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/pressload/p_backend/entity/Routine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/pressload/p_backend/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/com/pressload/p_backend/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/pressload/p_backend/request/CreateMealRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/pressload/p_backend/request/CreateRoutineRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/pressload/p_backend/request/auth/AuthenticationRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/pressload/p_backend/request/auth/RegisterRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/pressload/p_backend/response/AuthenticationResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/pressload/p_backend/response/ErrorResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/pressload/p_backend/service/AuthService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/pressload/p_backend/service/jwt/JwtAuthenticationFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/com/pressload/p_backend/service/jwt/JwtService.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,18 +29,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "DanielGlezDeChavesGonzalez"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;DanielGlezDeChavesGonzalez&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/DanielGlezDeChavesGonzalez/pressLoad.git",
-    "accountId": "a366aeee-57b5-43f9-8bfa-606aa9fd2c3c"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/DanielGlezDeChavesGonzalez/pressLoad.git&quot;,
+    &quot;accountId&quot;: &quot;a366aeee-57b5-43f9-8bfa-606aa9fd2c3c&quot;
   }
-}]]></component>
+}</component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -78,10 +48,10 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2ydKlJBVbjDz6HM0nXgJ2L58hdj" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -93,7 +63,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Danie/Desktop/pressLoad/backend"
+    "last_opened_file_path": "C:/Users/Danie/Desktop/pressLoad/p-backend"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
