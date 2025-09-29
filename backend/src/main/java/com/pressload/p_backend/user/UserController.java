@@ -22,27 +22,33 @@ public class UserController {
 
     private final UserService userService;
 
-    // Get all users
-//    @GetMapping("/")
-//    public ResponseEntity<List<User>> getAllUsers(){
-//        return ResponseEntity.ok().body(userService.getAllUsers());
-//    }
-
     // Get user by id
     @GetMapping("/{id}")
     public ResponseEntity<Optional<User>> getUserById(@PathVariable Long id) {
         return ResponseEntity.ok().body(userService.getUserById(id));
     }
 
+    @PostMapping("/register")
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        System.out.println(user);
+        User newUser = userService.saveUser(user);
+        return ResponseEntity.ok().body(newUser);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<User> loginUser(@RequestBody User user) {
+        return ResponseEntity.ok().body(user);
+    }
+
     // Update a user
     @PutMapping("/update")
-    public ResponseEntity<Optional<User>> updateUser(@RequestBody User user){
+    public ResponseEntity<Optional<User>> updateUser(@RequestBody User user) {
         return ResponseEntity.ok().body(userService.updateUser(user));
     }
 
     // Delete a user
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteUserById(@PathVariable Long id){
+    public ResponseEntity<String> deleteUserById(@PathVariable Long id) {
         userService.deleteUserById(id);
         return ResponseEntity.ok().body("Deleted user successfully");
     }

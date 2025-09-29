@@ -30,6 +30,7 @@ public class Routine {
 
     @Column(nullable = false, length = 100)
     private String name;
+
     private String description;
 
     @Column(nullable = false)

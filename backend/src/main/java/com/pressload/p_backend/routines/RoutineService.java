@@ -30,14 +30,13 @@ public class RoutineService {
     }
 
     public List<Routine> getRoutinesByUsername(String username) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        Optional<User> user = userRepository.findByUsername(username);
+
         return routineRepository.findByUserId(user.getId());
     }
 
     public List<Routine> getRoutinesByUserAndDate(String username, LocalDate date) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        Optional<User> user = userRepository.findByUsername(username);
         return routineRepository.findByUserAndDate(user, date);
     }
 
@@ -46,16 +45,18 @@ public class RoutineService {
     }
 
     public Routine createRoutine(String username, String name, String description, LocalDate date) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        Optional<User> user = userRepository.findByUsername(username);
 
         Routine routine = Routine.builder()
                 .name(name)
                 .description(description)
                 .date(date)
-                .user(user)
-                .createdBy(user)
+//                .user(user)
+//                .createdBy(user)
                 .build();
+
+
+
 
         return routineRepository.save(routine);
     }

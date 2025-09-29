@@ -12,11 +12,6 @@ public interface RoutineRepository extends JpaRepository<Routine, Long> {
 
     List<Routine> findByUserId(Long userId);
 
-    Optional<Routine> findByIdAndUserId(Long routineId, Long userId);
-
-    // Métodos para el dashboard
-    List<Routine> findByUserAndDateBetween(User user, LocalDate startDate, LocalDate endDate);
-
-    List<Routine> findByUserAndDate(User user, LocalDate date);
+    List<Routine> findByUserAndDate(Optional<User> user, LocalDate date);
 
 }

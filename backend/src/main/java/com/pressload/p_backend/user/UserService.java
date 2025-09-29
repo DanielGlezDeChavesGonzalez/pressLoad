@@ -4,7 +4,7 @@ import com.pressload.p_backend.entity.User;
 import com.pressload.p_backend.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -13,25 +13,19 @@ import java.util.Optional;
 
 
 @Service
-@Slf4j
 @RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
+//    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public List<User> getAllUsers(){
-        return userRepository.findAll();
-    }
-
-    public Optional<User> getUserById(Long id){
+    public Optional<User> getUserById(Long id) {
         return userRepository.findById(id);
     }
 
-    public Optional<User> getUserByUsernameAndPassword(String username, String password){
-        return Optional.ofNullable(userRepository.findByUsernameAndPassword(username, password));
-    }
-
-    public User saveUser(User user){
+    public User saveUser(User user) {
+        System.out.println(user + "userService");
+//        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -41,7 +35,7 @@ public class UserService {
                     existingUser.setUsername(updatedUser.getUsername());
                     existingUser.setEmail(updatedUser.getEmail());
                     existingUser.setPassword(updatedUser.getPassword()); // Considera encriptar antes de guardar
-                    existingUser.setRole(updatedUser.getRole()); // Si maneja roles
+//                    existingUser.setRole(updatedUser.getRole()); // Si maneja roles
                     return userRepository.save(existingUser);
                 });
     }
