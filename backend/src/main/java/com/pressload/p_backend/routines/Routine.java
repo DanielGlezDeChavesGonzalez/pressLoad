@@ -1,6 +1,8 @@
-package com.pressload.p_backend.entity;
+package com.pressload.p_backend.routines;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.pressload.p_backend.entity.RoutineExercise;
+import com.pressload.p_backend.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

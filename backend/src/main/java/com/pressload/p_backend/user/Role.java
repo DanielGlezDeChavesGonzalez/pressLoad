@@ -1,4 +1,4 @@
-package com.pressload.p_backend.entity;
+package com.pressload.p_backend.user;
 
 public enum Role {
 

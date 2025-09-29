@@ -1,7 +1,5 @@
-package com.pressload.p_backend.controller;
+package com.pressload.p_backend.user;
 
-import com.pressload.p_backend.entity.User;
-import com.pressload.p_backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;

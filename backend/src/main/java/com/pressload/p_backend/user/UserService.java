@@ -1,14 +1,9 @@
-package com.pressload.p_backend.service;
+package com.pressload.p_backend.user;
 
-import com.pressload.p_backend.entity.User;
-import com.pressload.p_backend.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -23,23 +18,16 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    public User saveUser(User user) {
-        System.out.println(user + "userService");
-//        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
-    }
-
     public Optional<User> updateUser(User updatedUser) {
         return userRepository.findById(updatedUser.getId())
                 .map(existingUser -> {
                     existingUser.setUsername(updatedUser.getUsername());
                     existingUser.setEmail(updatedUser.getEmail());
-                    existingUser.setPassword(updatedUser.getPassword()); // Considera encriptar antes de guardar
+                    existingUser.setPassword(updatedUser.getPassword());
 //                    existingUser.setRole(updatedUser.getRole()); // Si maneja roles
                     return userRepository.save(existingUser);
                 });
     }
-
 
     public void deleteUserById(Long id) {
         User user = userRepository.findById(id)

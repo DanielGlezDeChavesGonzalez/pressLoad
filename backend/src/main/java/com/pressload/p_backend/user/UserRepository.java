@@ -1,6 +1,5 @@
-package com.pressload.p_backend.repository;
+package com.pressload.p_backend.user;
 
-import com.pressload.p_backend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,9 +1,7 @@
-package com.pressload.p_backend.service;
+package com.pressload.p_backend.routines;
 
-import com.pressload.p_backend.entity.Routine;
-import com.pressload.p_backend.entity.User;
-import com.pressload.p_backend.repository.RoutineRepository;
-import com.pressload.p_backend.repository.UserRepository;
+import com.pressload.p_backend.user.User;
+import com.pressload.p_backend.user.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

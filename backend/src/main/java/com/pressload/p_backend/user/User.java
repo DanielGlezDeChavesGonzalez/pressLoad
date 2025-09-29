@@ -1,11 +1,9 @@
-package com.pressload.p_backend.entity;
+package com.pressload.p_backend.user;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import com.pressload.p_backend.routines.Routine;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -16,7 +14,6 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -41,10 +38,10 @@ public class User implements UserDetails {
 //            (strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true, length = 50)
+    @Column(nullable = false, unique = true, length = 25)
     private String username;
 
-    @Column(unique = true, length = 100)
+    @Column(nullable = false, unique = true, length = 50)
     private String email;
 
     @Column(nullable = false)
@@ -92,8 +89,5 @@ public class User implements UserDetails {
 //    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
 //    @JsonManagedReference
 //    private List<Meal> meals;
-
-//    @Column(nullable = false)
-//    @Enumerated(EnumType.STRING) // Guarda como "USER", "PAID_USER", "ADMIN"
-//    private Role role; // Puede ser "USER", "PAID_USER" o "ADMIN"
+    
 }
