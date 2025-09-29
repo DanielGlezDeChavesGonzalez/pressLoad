@@ -1,13 +1,11 @@
 package com.pressload.p_backend.entity;
 
-import com.pressload.p_backend.entity.Exercise;
-import com.pressload.p_backend.entity.Routine;
+import com.pressload.p_backend.routines.Routine;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.antlr.v4.runtime.misc.Pair;
 
 import java.util.List;
 
