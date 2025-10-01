@@ -4,9 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-/**
- * Repository is an interface that provides access to data in a database
- */
 
 public interface UserRepository extends JpaRepository<User,Long> {
 

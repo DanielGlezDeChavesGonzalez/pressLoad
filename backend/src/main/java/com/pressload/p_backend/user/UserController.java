@@ -26,18 +26,6 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getUserById(id));
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        System.out.println(user);
-        User newUser = userService.saveUser(user);
-        return ResponseEntity.ok().body(newUser);
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<User> loginUser(@RequestBody User user) {
-        return ResponseEntity.ok().body(user);
-    }
-
     // Update a user
     @PutMapping("/update")
     public ResponseEntity<Optional<User>> updateUser(@RequestBody User user) {
