@@ -9,8 +9,5 @@ import java.util.Optional;
 
 public interface RoutineRepository extends JpaRepository<Routine, Long> {
 
-    List<Routine> findByUserId(Long userId);
-
-    List<Routine> findByUserAndDate(Optional<User> user, LocalDate date);
-
+    List<Routine> findByCreatedBy(String createdBy);
 }

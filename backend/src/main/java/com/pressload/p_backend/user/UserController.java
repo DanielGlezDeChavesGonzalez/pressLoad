@@ -1,8 +1,10 @@
 package com.pressload.p_backend.user;
 
 import com.pressload.p_backend.auth.LoginDto;
+import com.pressload.p_backend.security.jwt.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +23,7 @@ import java.util.Optional;
 public class UserController {
 
     private final UserService userService;
+    private final JwtService jwtService;
 
     @GetMapping("/")
     public ResponseEntity<Optional<List<User>>> getAllUsers (){
@@ -29,8 +32,8 @@ public class UserController {
 
     // Get user by id
     @GetMapping("/profile")
-    public ResponseEntity<Optional<User>> getUserById(@RequestBody LoginDto loginDto) {
-        return ResponseEntity.ok().body(userService.getUserByUsername(loginDto.getUsername()));
+    public ResponseEntity<Optional<User>> getUserById(@AuthenticationPrincipal User user) {
+        return ResponseEntity.ok().body(userService.getUserByUsername(user.getUsername()));
     }
 
     // Update a user
