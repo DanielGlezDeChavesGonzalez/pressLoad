@@ -36,8 +36,9 @@ public class AuthController {
 
     }
 
-    @PostMapping("/logout")
-    public void logout(@RequestBody LoginDto LoginUserDto) {
+//    @PostMapping("/logout")
+//    public void logout(@RequestBody LoginDto LoginUserDto) {
+//
+//    }
 
-    }
 }

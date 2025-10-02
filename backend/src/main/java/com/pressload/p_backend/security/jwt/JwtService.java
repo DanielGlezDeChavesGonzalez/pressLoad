@@ -22,12 +22,12 @@ import java.util.function.Function;
 public class JwtService {
 
     @Value("${jwt.secret}")
-    private final String SECRET_KEY;
+    private  String SECRET_KEY;
 
     @Value("${jwt.tokenDurationMillis}")
     private long tokenExpiration;
 
-    @Value("${jwt.secret}")
+    @Value("${jwt.refreshTokenDurationMillis}")
     private long refreshTokenExpiration;
 
 
@@ -78,7 +78,7 @@ public class JwtService {
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + tokenExpiration))
+                .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

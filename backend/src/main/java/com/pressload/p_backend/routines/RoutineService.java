@@ -29,8 +29,8 @@ public class RoutineService {
 
     public List<Routine> getRoutinesByUsername(String username) {
         Optional<User> user = userRepository.findByUsername(username);
+        return user.map(value -> routineRepository.findByUserId(value.getId())).orElse(null);
 
-        return routineRepository.findByUserId(user.getId());
     }
 
     public List<Routine> getRoutinesByUserAndDate(String username, LocalDate date) {
@@ -52,8 +52,6 @@ public class RoutineService {
 //                .user(user)
 //                .createdBy(user)
                 .build();
-
-
 
 
         return routineRepository.save(routine);
