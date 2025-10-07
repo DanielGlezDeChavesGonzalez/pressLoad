@@ -38,14 +38,14 @@ public class UserController {
 
     // Update a user
     @PutMapping("/update")
-    public ResponseEntity<Optional<User>> updateUser(@RequestBody User user) {
+    public ResponseEntity<Optional<User>> updateUser(@AuthenticationPrincipal User user) {
         return ResponseEntity.ok().body(userService.updateUser(user));
     }
 
     // Delete a user
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteUserById(@PathVariable Long id) {
-        userService.deleteUserById(id);
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteUserById(@AuthenticationPrincipal User user) {
+        userService.deleteUserById(user.getId());
         return ResponseEntity.ok().body("Deleted user successfully");
     }
 }

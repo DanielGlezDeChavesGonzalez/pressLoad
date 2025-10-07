@@ -9,5 +9,4 @@ import java.util.Optional;
 
 public interface RoutineRepository extends JpaRepository<Routine, Long> {
 
-    List<Routine> findByCreatedBy(String createdBy);
 }

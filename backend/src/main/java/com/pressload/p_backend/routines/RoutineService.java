@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+
 import java.util.List;
 
 @Service
@@ -20,20 +20,21 @@ public class RoutineService {
     private final UserRepository userRepository;
 
 
-    public List<Routine> getRoutinesByUsername(String username) {
-        return routineRepository.findByCreatedBy(username);
-
+    public List<Routine> getUserRoutines(User user) {
+        return userRepository.findByUsername(user.getUsername()).orElseThrow().getRoutines();
     }
 
     public Routine saveRoutine(RoutineRequest routineRequest, User user) {
         Routine routine = Routine.builder()
                 .name(routineRequest.getName())
                 .description(routineRequest.getDescription())
-                .user(user)
+                .user(userRepository.findByUsername(user.getUsername()).orElseThrow())
                 .createdAt(LocalDateTime.now())
                 .createdBy(user.getUsername())
+//                .routineExercises(routineRequest.getRoutineExercise())
                 .build();
 
+        System.out.println(routine);
         List<RoutineExercise> exercises = routineRequest.getRoutineExercise().stream()
                 .map(exRequest -> RoutineExercise.builder()
                         .exerciseName(exRequest.getExerciseName())
@@ -51,10 +52,21 @@ public class RoutineService {
         return routineRepository.save(routine);
     }
 
-
-    public void deleteRoutineById(Long id) {
+    public void deleteRoutine(Long id) {
         Routine routine = routineRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Routine not found with id: " + id));
         routineRepository.delete(routine);
+    }
+
+    public Routine updateRoutine(Long id, RoutineRequest routineRequest, User user) {
+
+        Routine oldRoutine = routineRepository.findById(id).orElseThrow();
+
+        oldRoutine.setRoutineExercises(routineRequest.getRoutineExercise());
+        oldRoutine.setUpdatedAt(LocalDateTime.now());
+        oldRoutine.setName(routineRequest.getName());
+        oldRoutine.setDescription(routineRequest.getDescription());
+
+        return routineRepository.save(oldRoutine);
     }
 }

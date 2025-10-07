@@ -15,5 +15,5 @@ public class RoutineRequest {
     private String name;
     private String description;
     private String date;
-    private List<RoutineExerciseRequest> routineExercise;
+    private List<RoutineExercise> routineExercise;
 }
