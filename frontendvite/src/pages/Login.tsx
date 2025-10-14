@@ -1,10 +1,12 @@
 import logo from "../assets/logo.jpg";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useAuth } from "../context/authContext";
+// import { useNavigate } from "react-router-dom";
+// import axios from "axios";
 
 export default function Login() {
-  const navigate = useNavigate();
+  const { login } = useAuth();
+  // const navigate = useNavigate();
 
   const [formInfo, setFormInfo] = useState({
     username: "",
@@ -19,13 +21,14 @@ export default function Login() {
         return;
       }
 
-      const response = await axios.post(
-        "http::/localhost/users/login",
-        formInfo
-      );
+      await login(formInfo.username, formInfo.password);
+      // const response = await axios.post(
+      //   "http::/localhost/users/login",
+      //   formInfo
+      // );
 
-      console.log("Login successful:", response);
-      navigate("/");
+      // console.log("Login successful:", response);
+      // navigate("/");
     } catch (error) {
       if (error instanceof Error) {
         console.error("Login failed:", error.message);

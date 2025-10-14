@@ -1,11 +1,13 @@
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.jpg";
 import { useState } from "react";
-import axios from "axios";
+import { useAuth } from "../context/authContext";
 
 export default function Register() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   // const [premium, setPremium] = useState("");
+
+  const {register} = useAuth();
 
   const [formInfo, setFormInfo] = useState({
     email: "",
@@ -33,16 +35,17 @@ export default function Register() {
         throw new Error("Passwords do not match");
       }
 
-      console.log(formInfo);
+      await register(formInfo.username, formInfo.email, formInfo.password);
 
-      const response = await axios.post(
-        "http://localhost:8080/users/register",
-        formInfo
-      );
 
-      console.log("respuesta: ", response);
+      // const response = await axios.post(
+      //   "http://localhost:8080/users/register",
+      //   formInfo
+      // );
 
-      navigate("/login");
+      // console.log("respuesta: ", response);
+
+      // navigate("/login");
     } catch (error) {
       if (error instanceof Error) {
         console.error("Signup failed:", error.message);
