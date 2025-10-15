@@ -1,16 +1,19 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
-import { Navigate, useNavigate } from "react-router-dom";
+import {TokenService} from "../services/token.service";
 
 const api = axios.create({
   baseURL: "http://localhost:8080/",
   // import.meta.env.VITE_API_URL ||
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 // Agrega el access token a todas las peticiones
 api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-  const token = localStorage.getItem("accessToken");
-  if (token && config.headers) {
-    config.headers.Authorization = `Bearer ${token}`;
+  const token = TokenService.getLocalAccessToken();
+  if (token) {
+    config.headers["Authorization"] = 'Bearer ' + token;
   }
   return config;
 });
@@ -19,34 +22,27 @@ api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 api.interceptors.response.use(
   (res) => res,
   async (error: AxiosError) => {
-    const originalRequest = error.config as InternalAxiosRequestConfig & {
+    const originalConfig = error.config as InternalAxiosRequestConfig & {
       _retry?: boolean;
     };
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
+    if (originalConfig.url !== "/auth/signin" && error.response) {
+      // Access Token was expired
+      if (error.response.status === 401 && !originalConfig._retry) {
+        originalConfig._retry = true;
 
-      const refreshToken = localStorage.getItem("refreshToken");
-      if (!refreshToken) {
-        window.location.replace("/login");
-        return Promise.reject(error);
-      }
+        try {
+          const rs = await api.post("/auth/refreshtoken", {
+            refreshToken: TokenService.getLocalRefreshToken(),
+          });
 
-      try {
-        const { data } = await axios.post<{ accessToken: string }>(
-          "http://localhost:8080/auth/refresh",
-          { refreshToken }
-        );
+          const { accessToken } = rs.data;
+          TokenService.updateLocalAccessToken(accessToken);
 
-        localStorage.setItem("accessToken", data.accessToken);
-        originalRequest.headers.Authorization = `Bearer ${data.accessToken}`;
-
-        return api(originalRequest);
-      } catch (refreshError) {
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
-        window.location.replace("/login");
-        return Promise.reject(refreshError);
+          return api(originalConfig);
+        } catch (_error) {
+          return Promise.reject(_error);
+        }
       }
     }
 

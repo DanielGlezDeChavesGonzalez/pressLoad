@@ -1,20 +1,24 @@
 import logo from "../assets/logo.jpg";
 import { useState } from "react";
 import { useAuth } from "../context/authContext";
-// import { useNavigate } from "react-router-dom";
-// import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const { login } = useAuth();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [formInfo, setFormInfo] = useState({
     username: "",
     password: "",
   });
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = async () => {
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault(); // Evita que el formulario recargue la página
+    setLoading(true);
+    setError("");
+
     try {
       if (!formInfo.username || !formInfo.password) {
         setError("Please enter both username and password.");
@@ -22,13 +26,9 @@ export default function Login() {
       }
 
       await login(formInfo.username, formInfo.password);
-      // const response = await axios.post(
-      //   "http::/localhost/users/login",
-      //   formInfo
-      // );
 
-      // console.log("Login successful:", response);
-      // navigate("/");
+      // Navega al home después del login exitoso
+      navigate("/");
     } catch (error) {
       if (error instanceof Error) {
         console.error("Login failed:", error.message);
@@ -38,6 +38,8 @@ export default function Login() {
       setError(
         error instanceof Error ? error.message : "An unknown error occurred."
       );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -63,7 +65,7 @@ export default function Login() {
             </h1>
             <form
               className="space-y-4 md:space-y-6"
-              action="#"
+              onSubmit={handleLogin}
             >
               <div>
                 <label
@@ -137,12 +139,12 @@ export default function Login() {
               </div>
               <button
                 type="submit"
+                disabled={loading}
                 className="w-full text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 
                         font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800
-                        "
-                onClick={handleLogin}
+                        disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Sign in
+                {loading ? "Signing in..." : "Sign in"}
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Don’t have an account yet?{" "}

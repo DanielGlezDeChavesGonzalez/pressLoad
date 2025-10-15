@@ -1,13 +1,11 @@
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.jpg";
 import { useState } from "react";
 import { useAuth } from "../context/authContext";
 
 export default function Register() {
-  // const navigate = useNavigate();
-  // const [premium, setPremium] = useState("");
-
-  const {register} = useAuth();
+  const navigate = useNavigate();
+  const { register } = useAuth();
 
   const [formInfo, setFormInfo] = useState({
     email: "",
@@ -16,9 +14,14 @@ export default function Register() {
     confirmPassword: "",
   });
 
-  const [error, setError] = useState(""); // State to manage error messages
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleRegister = async () => {
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault(); // Evita que el formulario recargue la página
+    setLoading(true);
+    setError("");
+
     try {
       // Check for empty fields
       if (
@@ -37,15 +40,8 @@ export default function Register() {
 
       await register(formInfo.username, formInfo.email, formInfo.password);
 
-
-      // const response = await axios.post(
-      //   "http://localhost:8080/users/register",
-      //   formInfo
-      // );
-
-      // console.log("respuesta: ", response);
-
-      // navigate("/login");
+      // Navega al home después del registro exitoso
+      navigate("/");
     } catch (error) {
       if (error instanceof Error) {
         console.error("Signup failed:", error.message);
@@ -55,6 +51,8 @@ export default function Register() {
       setError(
         error instanceof Error ? error.message : "An unknown error occurred"
       );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -80,7 +78,7 @@ export default function Register() {
             </h1>
             <form
               className="space-y-4 md:space-y-6"
-              action="#"
+              onSubmit={handleRegister}
             >
               <div>
                 <label
@@ -175,7 +173,7 @@ export default function Register() {
                     })
                   }
                 />
-               </div>
+              </div>
               {/*<div className="flex items-start">
                 <div className="flex items-center h-5">
                   <input
@@ -215,12 +213,12 @@ export default function Register() {
               </label> */}
               <button
                 type="submit"
+                disabled={loading}
                 className="w-full text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 
                         font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800
-                        "
-                onClick={handleRegister}
+                        disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Create an account
+                {loading ? "Creating account..." : "Create an account"}
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Already have an account?{" "}
