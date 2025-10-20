@@ -91,27 +91,63 @@ public class AuthService {
         tokenRepository.saveAll(validUserTokens);
     }
 
+//    public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//        final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+//        final String refreshToken;
+//        final String username;
+//        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+//            return;
+//        }
+//        refreshToken = authHeader.substring(7);
+//        username = jwtService.extractUsername(refreshToken);
+//        if (username != null) {
+//            var user = this.userRepository.findByUsername(username).orElseThrow();
+//            if (jwtService.isTokenValid(refreshToken, user)) {
+//                var accessToken = jwtService.generateToken(user);
+//                revokeAllUserTokens(user);
+//                saveUserToken(user, accessToken);
+//                var authResponse = AuthResponse.builder()
+//                        .accessToken(accessToken)
+//                        .refreshToken(refreshToken)
+//                        .build();
+//                new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
+//            }
+//        }
+//    }
+
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         final String refreshToken;
         final String username;
+
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
+
         refreshToken = authHeader.substring(7);
         username = jwtService.extractUsername(refreshToken);
+
         if (username != null) {
             var user = this.userRepository.findByUsername(username).orElseThrow();
             if (jwtService.isTokenValid(refreshToken, user)) {
                 var accessToken = jwtService.generateToken(user);
                 revokeAllUserTokens(user);
                 saveUserToken(user, accessToken);
+
                 var authResponse = AuthResponse.builder()
                         .accessToken(accessToken)
                         .refreshToken(refreshToken)
                         .build();
+
+                response.setContentType("application/json");
+                response.setStatus(HttpServletResponse.SC_OK);
                 new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
+            } else {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             }
+        } else {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         }
     }
 }

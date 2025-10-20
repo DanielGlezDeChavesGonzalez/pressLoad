@@ -30,7 +30,7 @@ public class AuthController {
         return ResponseEntity.ok().body(authService.authenticateUser(LoginUserDto));
     }
 
-    @PostMapping("/refresh")
+    @PostMapping("/refreshtoken")
     public void refresh(HttpServletRequest request, HttpServletResponse response) throws IOException {
         authService.refreshToken(request,response);
 
