@@ -1,5 +1,5 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
-import {TokenService} from "../services/token.service";
+import { TokenService } from "../services/token.service";
 
 const api = axios.create({
   baseURL: "http://localhost:8080/",
@@ -26,21 +26,47 @@ api.interceptors.response.use(
       _retry?: boolean;
     };
 
-    if (originalConfig.url !== "/auth/signin" && error.response) {
+    if (originalConfig.url !== "/auth/login" && error.response) {
       // Access Token was expired
       if (error.response.status === 401 && !originalConfig._retry) {
         originalConfig._retry = true;
 
         try {
-          const rs = await api.post("/auth/refreshtoken", {
-            refreshToken: TokenService.getLocalRefreshToken(),
-          });
+          const refreshToken = TokenService.getLocalRefreshToken();
 
-          const { accessToken } = rs.data;
-          TokenService.updateLocalAccessToken(accessToken);
+          if (!refreshToken) {
+            // No hay refresh token, redirigir al login
+            window.location.href = "/login";
+            return Promise.reject(error);
+          }
+
+          // Envía el refresh token en el header Authorization (como lo espera el backend)
+          const rs = await axios.post(
+            "http://localhost:8080/auth/refreshtoken",
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${refreshToken}`,
+              },
+            }
+          );
+
+          const { access_token, refresh_token } = rs.data;
+
+          // Actualiza ambos tokens
+          TokenService.updateLocalAccessToken(access_token);
+          if (refresh_token) {
+            TokenService.updateLocalRefreshToken(refresh_token);
+          }
+
+          // Actualiza el header de la petición original con el nuevo token
+          originalConfig.headers["Authorization"] = `Bearer ${access_token}`;
 
           return api(originalConfig);
         } catch (_error) {
+          // Si falla el refresh, limpia tokens y redirige al login
+          TokenService.removeUser();
+          window.location.href = "/login";
           return Promise.reject(_error);
         }
       }

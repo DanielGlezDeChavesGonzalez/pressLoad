@@ -5,11 +5,25 @@ export interface AuthContextType {
   login: (username: string, password: string) => Promise<void>;
   register: (username: string, email: string, password: string) => Promise<void>;
   logout: () => void;
+  refreshUserData: () => Promise<void>;
+}
+
+export interface Role {
+  id?: number;
+  name?: string;
+}
+
+export interface Routine {
+  id?: number;
+  name?: string;
+  description?: string;
+  createdAt?: string;
+  // Agrega más campos según tu modelo
 }
 
 export interface User {
-  id?: string;
-  username?: string;
-  email?: string;
-  roles?: string[];
+  username: string;
+  email: string;
+  routines: Routine[];
+  role: Role;
 }

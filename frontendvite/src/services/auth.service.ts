@@ -10,13 +10,10 @@ class AuthService {
         password
       })
       .then(response => {
-        if (response.data.accessToken) {
+        if (response.data.access_token) {
           localStorage.setItem("access_token", response.data.access_token);
           localStorage.setItem("refresh_token", response.data.refresh_token);
         }
-
-        console.log("Login response data:", response.data);
-        console.log("Stored accessToken:", localStorage.getItem("accessToken"));
 
         return response.data;
       });
@@ -43,7 +40,6 @@ class AuthService {
   }
 
   getCurrentUser() {
-    console.log("Getting current user with token:", localStorage.getItem("access_token"));
     return axios.get(API_URL + "users/profile", {
       headers: { Authorization: 'Bearer ' + localStorage.getItem("access_token") }
     });

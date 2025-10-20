@@ -94,6 +94,17 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setUser(null);
   };
 
+  // Función para refrescar los datos del usuario sin hacer login nuevamente
+  const refreshUserData = async () => {
+    try {
+      const response = await AuthService.getCurrentUser();
+      setUser(response.data);
+    } catch (error) {
+      console.error("Error refreshing user data:", error);
+      throw error;
+    }
+  };
+
   const value: AuthContextType = {
     isAuthenticated: !!user,
     loading,
@@ -101,6 +112,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     login,
     register,
     logout,
+    refreshUserData,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
