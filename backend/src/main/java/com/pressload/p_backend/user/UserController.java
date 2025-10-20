@@ -26,14 +26,23 @@ public class UserController {
     private final JwtService jwtService;
 
     @GetMapping("/")
-    public ResponseEntity<Optional<List<User>>> getAllUsers (){
+    public ResponseEntity<Optional<List<User>>> getAllUsers() {
         return ResponseEntity.ok().body(userService.getAllUsers());
     }
 
     // Get user by id
     @GetMapping("/profile")
-    public ResponseEntity<Optional<User>> getUserById(@AuthenticationPrincipal User user) {
-        return ResponseEntity.ok().body(userService.getUserByUsername(user.getUsername()));
+    public ResponseEntity<UserDto> getUserById(@AuthenticationPrincipal User user) {
+
+        UserDto userDto = UserDto.builder()
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .role(user.getRole())
+                .routines(user.getRoutines())
+                .build();
+
+
+        return ResponseEntity.ok().body(userDto);
     }
 
     // Update a user
