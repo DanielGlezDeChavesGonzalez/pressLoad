@@ -1,19 +1,22 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/auth/";
+const API_URL = "http://localhost:8080/";
 
 class AuthService {
   login(username: string, password: string) {
     return axios
-      .post(API_URL + "login", {
+      .post(API_URL + "auth/login", {
         username,
         password
       })
       .then(response => {
         if (response.data.accessToken) {
-          localStorage.setItem("accessToken", response.data.accessToken);
-          localStorage.setItem("refreshToken", response.data.refreshToken);
+          localStorage.setItem("access_token", response.data.access_token);
+          localStorage.setItem("refresh_token", response.data.refresh_token);
         }
+
+        console.log("Login response data:", response.data);
+        console.log("Stored accessToken:", localStorage.getItem("accessToken"));
 
         return response.data;
       });
@@ -24,14 +27,14 @@ class AuthService {
   }
 
   register(username: string, email: string, password: string) {
-    return axios.post(API_URL + "register", {
+    return axios.post(API_URL + "auth/register", {
       username,
       email,
       password
     }).then(response => {
-      if (response.data.accessToken) {
-        localStorage.setItem("accessToken", response.data.accessToken);
-        localStorage.setItem("refreshToken", response.data.refreshToken);
+      if (response.data.access_token) {
+        localStorage.setItem("access_token", response.data.access_token);
+        localStorage.setItem("refresh_token", response.data.refresh_token);
       }
 
       return response.data;
@@ -40,8 +43,9 @@ class AuthService {
   }
 
   getCurrentUser() {
-    return axios.get(API_URL + "profile", {
-      headers: { Authorization: 'Bearer ' + localStorage.getItem("accessToken") }
+    console.log("Getting current user with token:", localStorage.getItem("access_token"));
+    return axios.get(API_URL + "users/profile", {
+      headers: { Authorization: 'Bearer ' + localStorage.getItem("access_token") }
     });
   }
 }

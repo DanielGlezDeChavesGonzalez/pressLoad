@@ -13,7 +13,7 @@ class UserService {
   }
 
   getUserRoutines() {
-    return axios.get(API_URL + '/routine/mine', { headers: authHeader() });
+    return axios.get(API_URL + 'routine/mine', { headers: authHeader() });
   }
 
   getAdminBoard() {

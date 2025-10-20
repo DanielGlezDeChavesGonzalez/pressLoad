@@ -47,11 +47,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
       const response = await AuthService.login(username, password);
 
       // Guarda los tokens (AuthService ya lo hace, pero por consistencia)
-      if (response.accessToken) {
-        TokenService.updateLocalAccessToken(response.accessToken);
+      if (response.access_token) {
+        TokenService.updateLocalAccessToken(response.access_token);
       }
-      if (response.refreshToken) {
-        TokenService.updateLocalRefreshToken(response.refreshToken);
+      if (response.refresh_token) {
+        TokenService.updateLocalRefreshToken(response.refresh_token);
       }
 
       // Obtiene los datos del usuario
@@ -72,11 +72,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
       const response = await AuthService.register(username, email, password);
 
       // Guarda los tokens
-      if (response.accessToken) {
-        TokenService.updateLocalAccessToken(response.accessToken);
+      if (response.access_token) {
+        TokenService.updateLocalAccessToken(response.access_token);
       }
-      if (response.refreshToken) {
-        TokenService.updateLocalRefreshToken(response.refreshToken);
+      if (response.refresh_token) {
+        TokenService.updateLocalRefreshToken(response.refresh_token);
       }
 
       // Obtiene los datos del usuario
