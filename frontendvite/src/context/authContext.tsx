@@ -57,9 +57,28 @@ export function AuthProvider({ children }: AuthProviderProps) {
       // Obtiene los datos del usuario
       const userResponse = await AuthService.getCurrentUser();
       setUser(userResponse.data);
-    } catch (error) {
-      console.error("Login failed:", error);
-      throw error;
+    } catch (error: any) {
+      // Manejo específico de errores según código HTTP
+      const status = error.response?.status;
+      const message = error.response?.data?.message || error.message;
+
+      let errorMessage = "Error de autenticación";
+
+      switch (status) {
+        case 401:
+          errorMessage = "El usuario no existe";
+          break;
+        case 403:
+          errorMessage = "Contraseña incorrecta";
+          break;
+        case 405:
+          errorMessage = "Error de autenticación. Intente nuevamente";
+          break;
+        default:
+          errorMessage = message || "Error desconocido";
+      }
+
+      throw new Error(errorMessage);
     }
   };
 
@@ -82,9 +101,24 @@ export function AuthProvider({ children }: AuthProviderProps) {
       // Obtiene los datos del usuario
       const userResponse = await AuthService.getCurrentUser();
       setUser(userResponse.data);
-    } catch (error) {
-      console.error("Registration failed:", error);
-      throw error;
+    } catch (error: any) {
+      const status = error.response?.status;
+      const message = error.response?.data?.message || error.message;
+
+      let errorMessage = "Error en el registro";
+
+      switch (status) {
+        case 400:
+          errorMessage = "Datos inválidos. Verifique la información";
+          break;
+        case 409:
+          errorMessage = "El usuario o email ya existe";
+          break;
+        default:
+          errorMessage = message || "Error desconocido en el registro";
+      }
+
+      throw new Error(errorMessage);
     }
   };
 

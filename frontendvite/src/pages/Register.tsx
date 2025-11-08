@@ -4,8 +4,8 @@ import { useState } from "react";
 import { useAuth } from "../context/authContext";
 
 export default function Register() {
-  const navigate = useNavigate();
   const { register } = useAuth();
+  const navigate = useNavigate();
 
   const [formInfo, setFormInfo] = useState({
     email: "",

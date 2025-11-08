@@ -15,29 +15,24 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault(); // Evita que el formulario recargue la página
-    setLoading(true);
+    e.preventDefault();
     setError("");
+    setLoading(true);
 
     try {
       if (!formInfo.username || !formInfo.password) {
-        setError("Please enter both username and password.");
+        setError("Por favor complete todos los campos");
         return;
       }
 
       await login(formInfo.username, formInfo.password);
-
-      // Navega al home después del login exitoso
       navigate("/");
     } catch (error) {
       if (error instanceof Error) {
-        console.error("Login failed:", error.message);
+        setError(error.message);
       } else {
-        console.error("Login failed:", error);
+        setError("Error desconocido. Intente nuevamente");
       }
-      setError(
-        error instanceof Error ? error.message : "An unknown error occurred."
-      );
     } finally {
       setLoading(false);
     }
@@ -59,7 +54,14 @@ export default function Login() {
         </a>
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            {error && <p className="text-danger">{error}</p>}
+            {error && (
+              <div
+                className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                role="alert"
+              >
+                <span className="block sm:inline">{error}</span>
+              </div>
+            )}
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Sign in to your account
             </h1>
@@ -81,7 +83,7 @@ export default function Login() {
                   className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-gray-600 
                             focus:border-gray-600 flex w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
                              dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="name@company.com"
+                  placeholder="username"
                   required={true}
                   value={formInfo.username}
                   onChange={(e) =>
